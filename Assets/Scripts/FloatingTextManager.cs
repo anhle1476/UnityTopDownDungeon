@@ -4,6 +4,9 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Handle showing text for the game with a pool of <see cref="FloatingText"/> objects.
+/// </summary>
 public class FloatingTextManager : MonoBehaviour
 {
     public GameObject textContainer;

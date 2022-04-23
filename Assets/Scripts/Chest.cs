@@ -1,4 +1,3 @@
-using Assets.Scripts.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +20,9 @@ public class Chest : Collectable
         {
             Message = $"+{pesosAmount} pesos",
             Position = transform.position,
-            Motion = Vector3Utils.Up(collectMsgMotionSpeed)
+            Color = Color.yellow,
+            Duration = 1f,
+            Motion = Vector3.up * collectMsgMotionSpeed
         });
     }
 }

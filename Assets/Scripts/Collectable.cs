@@ -1,3 +1,4 @@
+using Assets.Scripts.Constants;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class Collectable : Collidable
 
     protected override void OnCollide(Collider2D collider)
     {
-        if (!isCollected)
+        if (collider.CompareTag(Tags.PLAYER) && !isCollected)
         {
             OnCollect(collider);
             isCollected = true;
