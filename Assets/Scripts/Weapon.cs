@@ -1,18 +1,53 @@
+using Assets.Scripts.Constants;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : Collidable
 {
-    // Start is called before the first frame update
-    void Start()
+    // Damage struct
+    public int damagePoint = 1;
+    public float pushForce = 2.0f;
+
+    // Upgrade
+    public int weaponLevel = 1;
+    public SpriteRenderer spriteRenderer;
+
+    // Swing
+    public float cooldown = 0.5f;
+    private float lastSwing;
+
+    protected override void Start()
     {
-        
+        base.Start();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    protected override void SpecificUpdate()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.time - lastSwing > cooldown)
+            {
+                lastSwing = Time.time;
+                Swing();
+            }
+        }
+    }
+
+    private void Swing()
+    {
+        Debug.Log("Swing");
+        //transform.Rotate(0, 0, -5f, Space.Self);
+    }
+
+    protected override void OnCollide(Collider2D collider)
+    {
+        if (collider.CompareTag(Tags.FIGHTER))
+        {
+            Debug.Log("Hit " + collider.name);
+        }
     }
 }

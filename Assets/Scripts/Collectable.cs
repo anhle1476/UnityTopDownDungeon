@@ -9,7 +9,7 @@ public class Collectable : Collidable
 
     protected override void OnCollide(Collider2D collider)
     {
-        if (collider.CompareTag(Tags.PLAYER) && !isCollected)
+        if (collider.name == "Player" && !isCollected)
         {
             OnCollect(collider);
             isCollected = true;

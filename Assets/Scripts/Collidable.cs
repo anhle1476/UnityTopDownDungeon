@@ -27,11 +27,20 @@ public class Collidable : MonoBehaviour
             // free the collider array
             hits[i] = null;
         }
+
+        SpecificUpdate();
+    }
+
+    /// <summary>
+    /// Call after the the collide checking logic in <see cref="Update"/> method
+    /// </summary>
+    protected virtual void SpecificUpdate()
+    {
+
     }
 
     protected virtual void OnCollide(Collider2D collider)
     {
-        Debug.Log(collider.name);
     }
 
 }
