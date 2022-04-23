@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FloatingTextManager : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class FloatingTextManager : MonoBehaviour
             floatingText = new FloatingText();
             floatingText.go = Instantiate(textPrefab);
             floatingText.go.transform.SetParent(textContainer.transform);
-            floatingText.txt = floatingText.go.GetComponent<Text>();
+            floatingText.txt = floatingText.go.GetComponent<TextMeshProUGUI>();
 
             floatingTexts.Add(floatingText);
         }
@@ -36,14 +36,14 @@ public class FloatingTextManager : MonoBehaviour
     {
         FloatingText floatingText = GetFloatingText();
 
-        floatingText.txt.text = textInfo.Message;
-        floatingText.txt.fontSize = textInfo.FontSize;
-        floatingText.txt.color = textInfo.Color;
+        floatingText.txt.text              = textInfo.Message;
+        floatingText.txt.fontSize          = textInfo.FontSize;
+        floatingText.txt.color             = textInfo.Color;
 
         // Transfer world space to screen space so the Text will show up in the camera
         floatingText.go.transform.position = Camera.main.WorldToScreenPoint(textInfo.Position);
-        floatingText.motion = textInfo.Motion;
-        floatingText.duration = textInfo.Duration;
+        floatingText.motion                = textInfo.Motion;
+        floatingText.duration              = textInfo.Duration;
 
         floatingText.Show();
     }

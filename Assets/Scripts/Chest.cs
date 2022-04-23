@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,21 @@ public class Chest : Collectable
 {
     public Sprite emptyChest;
     public int pesosAmount = 5;
+    public float collectMsgMotionSpeed = 20f;
+
     protected override void OnCollect(Collider2D collider)
     {
         GetComponent<SpriteRenderer>().sprite = emptyChest;
-        Debug.Log($"Grant {pesosAmount} pesos to {collider.name}");
+        ShowCollectMessage();
+    }
+
+    private void ShowCollectMessage()
+    {
+        GameManager.instance.ShowText(new FloatingText.TextInfoDTO
+        {
+            Message = $"+{pesosAmount} pesos",
+            Position = transform.position,
+            Motion = Vector3Utils.Up(collectMsgMotionSpeed)
+        });
     }
 }

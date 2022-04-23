@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FloatingText
 {
@@ -13,18 +13,18 @@ public class FloatingText
     public class TextInfoDTO
     {
         public string Message { get; set; }
-        public int FontSize { get; set; }
-        public Color Color { get; set; }
+        public int FontSize { get; set; } = 22;
+        public Color Color { get; set; } = Color.white;
         public Vector3 Position { get; set; }
-        public Vector3 Motion { get; set; }
-        public float Duration { get; set; }
+        public Vector3 Motion { get; set; } = Vector3.zero;
+        public float Duration { get; set; } = 0.5f;
     }
 
     #endregion
 
     public bool active;
     public GameObject go;
-    public Text txt;
+    public TextMeshProUGUI txt;
     public Vector3 motion;
     public float duration;
     public float lastShown;

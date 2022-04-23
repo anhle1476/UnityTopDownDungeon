@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
     public int pesos;
     public int experience;
 
+    /// <summary>
+    /// Show floating text
+    /// </summary>
+    /// <param name="textInfo"></param>
     public void ShowText(FloatingText.TextInfoDTO textInfo)
     {
         floatingTextManager.Show(textInfo);
