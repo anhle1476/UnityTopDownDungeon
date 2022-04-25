@@ -45,9 +45,18 @@ public class Weapon : Collidable
 
     protected override void OnCollide(Collider2D collider)
     {
-        if (collider.CompareTag(Tags.FIGHTER))
+        if (collider.CompareTag(Tags.FIGHTER) && collider.name != "Player")
         {
             Debug.Log("Hit " + collider.name);
+
+            Damage dmg = new Damage
+            {
+                damageAmount = damagePoint,
+                origin = transform.position,
+                pushForce = pushForce
+            };
+
+            collider.SendMessage("ReceiveDamage", dmg);
         }
     }
 }
