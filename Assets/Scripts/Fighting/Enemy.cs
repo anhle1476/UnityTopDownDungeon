@@ -40,40 +40,38 @@ public class Enemy : Mover
     {
         Vector3 toStarting = startingPosition - transform.position;
         float toStartingLength = toStarting.magnitude;
-        Debug.Log("To Starting length " + toStartingLength);
 
-        bool shouldChase = false;
+        // TODO: implement patrolling logic instead of just return to the original position
         if (toStartingLength < chaseLength)
         {
             Vector3 toPlayer = playerTransform.position - transform.position;
-            shouldChase = toPlayer.magnitude <= triggerLength && Time.time - lastChase > chaseCooldown;
 
-            if (shouldChase)
-            {
+            // start chasing if user is in trigger length and only end when it's out chasing of range
+            if (toPlayer.magnitude <= triggerLength && Time.time - lastChase > chaseCooldown)
+                chasing = true;
+
+            if (chasing)
+            {    
                 if (!collidingWithPlayer)
                 {
-                    Debug.Log("Chasing ");
-                    UpdateMotor(toPlayer.normalized * speed);
+                    // Chasing 
+                    UpdateMotor(toPlayer, speed);
                 }
             }
             else
             {
-                Debug.Log("Out of trigger ");
-                ToStartingPoint(toStarting);
+                // Still in range but no chasing
+                UpdateMotor(toStarting, speed);
             }
         }
         else
         {
-            Debug.Log("Out of range ");
-            ToStartingPoint(toStarting);
-            shouldChase = false;
-        }
-
-        if (!shouldChase && chasing)
-        {
+            // Out of range
+            UpdateMotor(toStarting, speed);
+            chasing = false;
             lastChase = Time.time;
         }
-        chasing = shouldChase;
+
 
         collidingWithPlayer = false;
         boxCollider.OverlapCollider(contactFilter, hits);
@@ -97,12 +95,18 @@ public class Enemy : Mover
         }
     }
 
-    private void ToStartingPoint(Vector3 toStarting)
+    protected override void Death()
     {
-        // not update if the distance to starting point is <=1 as UpdateMotor will apply the X and Y speed
-        // -> the movement distance might not be correct and we will not be able to return to it forever
-        if (toStarting.magnitude > 0.05)
-            UpdateMotor(toStarting.normalized * speed);
+        GameManager.instance.experience += xpValue;
+        GameManager.instance.ShowText(new FloatingText.TextInfoDTO
+        {
+            Message = $"+{xpValue}xp",
+            Color = Color.magenta,
+            Motion = Vector3.up * 10,
+            Position = transform.position
+        });
+
+        Destroy(gameObject, 0.2f);
     }
 
     /* private void RandomlyPickNewDirection()

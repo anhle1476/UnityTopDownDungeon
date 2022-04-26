@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public abstract class Mover : Fighter
 {
+    public List<string> movementBlockingLayers = new List<string> { "Actor", "Blocking" };
+
     protected BoxCollider2D boxCollider;
     protected Vector3 moveDelta;
     protected RaycastHit2D hit;
@@ -17,10 +19,24 @@ public abstract class Mover : Fighter
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
-    protected virtual void UpdateMotor(Vector3 input)
+    /// <summary>
+    /// Move the object positon to the target direction with a specified speed
+    /// </summary>
+    /// <param name="toTargetPosition"></param>
+    /// <param name="movementSpeed"></param>
+    protected virtual void UpdateMotor(Vector3 toTargetPosition, float movementSpeed = 1)
     {
+        var direction = toTargetPosition.normalized;
         // update MoveDelta
-        moveDelta = new Vector3(input.x * xSpeed, input.y * ySpeed, 0);
+        moveDelta = new Vector3(direction.x * xSpeed * movementSpeed, direction.y * ySpeed * movementSpeed, 0);
+
+        if (toTargetPosition.magnitude <= moveDelta.magnitude)
+        {
+            // Distance to the target is smaller then the move delta, we will move to the target directly instead of go pass it
+            moveDelta = toTargetPosition;
+        }
+
+        int blockingLayerMask = LayerMask.GetMask(movementBlockingLayers.ToArray()); ;
 
         // flip the character facing direction left/right
         if (moveDelta.x > 0)
@@ -35,12 +51,16 @@ public abstract class Mover : Fighter
             angle: 0,
             direction: new Vector2(0, moveDelta.y),
             distance: Mathf.Abs(moveDelta.y * Time.deltaTime),
-            layerMask: LayerMask.GetMask("Actor", "Blocking"));
+            layerMask: blockingLayerMask);
 
 
         if (hit.collider == null)
         {
             transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
+        }
+        else
+        {
+            SpecificMovingOnYHit(moveDelta, hit.collider);
         }
 
         // hit for x direction
@@ -50,11 +70,37 @@ public abstract class Mover : Fighter
             angle: 0,
             direction: new Vector2(moveDelta.x, 0),
             distance: Mathf.Abs(moveDelta.x * Time.deltaTime),
-            layerMask: LayerMask.GetMask("Actor", "Blocking"));
+            layerMask: blockingLayerMask);
 
         if (hit.collider == null)
         {
             transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
         }
+        else
+        {
+            SpecificMovingOnXHit(moveDelta, hit.collider);
+        }
+    }
+
+    /// <summary>
+    /// Specific handling the movement when Y is hit on moving. 
+    /// Otherwise, there will be no Y direction movement by default.
+    /// </summary>
+    /// <param name="moveDelta"></param>
+    /// <param name="collider"></param>
+    protected virtual void SpecificMovingOnYHit(Vector3 moveDelta, Collider2D collider)
+    {
+
+    }
+
+    /// <summary>
+    /// Specific handling the movement when Y is hit on moving. 
+    /// Otherwise, there will be no X direction movement by default.
+    /// </summary>
+    /// <param name="moveDelta"></param>
+    /// <param name="collider"></param>
+    protected virtual void SpecificMovingOnXHit(Vector3 moveDelta, Collider2D collider)
+    {
+
     }
 }
