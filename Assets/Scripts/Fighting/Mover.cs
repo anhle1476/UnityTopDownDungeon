@@ -40,6 +40,11 @@ public abstract class Mover : Fighter
             moveDelta = toTargetPosition;
         }
 
+        if (Time.time - lastImmune < pushRecoverySpeed)
+        {
+            moveDelta += pushDirection;
+        }
+
         int blockingLayerMask = LayerMask.GetMask(movementBlockingLayers.ToArray()); ;
 
         // flip the character facing direction left/right

@@ -52,14 +52,6 @@ public class Fighter : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        if (Time.time - lastImmune < pushRecoverySpeed)
-        {
-            transform.Translate(pushDirection * Time.deltaTime);
-        }
-    }
-
     private void ShowDamageReceived(int damageAmount)
     {
         GameManager.instance.ShowText(new FloatingText.TextInfoDTO
