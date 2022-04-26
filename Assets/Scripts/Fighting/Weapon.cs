@@ -8,7 +8,7 @@ public class Weapon : Collidable
 {
     // Damage struct
     public int damagePoint = 1;
-    public float pushForce = 2.0f;
+    public float pushForce = 0.5f;
 
     // Upgrade
     public int weaponLevel = 1;

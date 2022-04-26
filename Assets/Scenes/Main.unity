@@ -389,7 +389,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   damagePoint: 1
-  pushForce: 2
+  pushForce: 0.5
   weaponLevel: 1
   spriteRenderer: {fileID: 0}
   cooldown: 0.5
@@ -914,7 +914,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   damagePoint: 1
-  pushForce: 2
+  pushForce: 0.5
   hitCooldown: 0.5
 --- !u!1 &1249513078
 GameObject:
@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e12abe8c1a60d64f9c2c48b2deaeb3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: 20
+  hitPoint: 2
   maxHitPoint: 10
   pushRecoverySpeed: 0.2
   movementBlockingLayers:

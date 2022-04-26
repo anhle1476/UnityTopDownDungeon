@@ -27,6 +27,9 @@ public class Fighter : MonoBehaviour
 
     protected virtual void ReceiveDamage(Damage dmg)
     {
+        if (IsDeath)
+            return;
+
         if (Time.time - lastImmune > immuneTime)
         {
             lastImmune = Time.time;
@@ -47,6 +50,14 @@ public class Fighter : MonoBehaviour
     protected virtual void Death()
     {
         
+    }
+
+    private void Update()
+    {
+        if (Time.time - lastImmune < pushRecoverySpeed)
+        {
+            transform.Translate(pushDirection * Time.deltaTime);
+        }
     }
 
     private void ShowDamageReceived(int damageAmount)
