@@ -837,6 +837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1190671816}
   - component: {fileID: 1190671817}
+  - component: {fileID: 1190671818}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -885,6 +886,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1190671818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190671815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bd55b06d43bd4478c6f598e84596b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collidable: 1
+  contactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  damagePoint: 1
+  pushForce: 2
+  hitCooldown: 0.5
 --- !u!1 &1249513078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,9 +1041,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e12abe8c1a60d64f9c2c48b2deaeb3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: 2
+  hitPoint: 20
   maxHitPoint: 10
   pushRecoverySpeed: 0.2
+  movementBlockingLayers:
+  - Actor
+  - Blocking
   xpValue: 1
   speed: 0.5
   triggerLength: 0.5
@@ -1982,6 +2016,10 @@ MonoBehaviour:
   hitPoint: 10
   maxHitPoint: 10
   pushRecoverySpeed: 0.2
+  movementBlockingLayers:
+  - Actor
+  - Blocking
+  speed: 1
 --- !u!61 &1655212244
 BoxCollider2D:
   m_ObjectHideFlags: 0

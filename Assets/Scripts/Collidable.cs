@@ -1,3 +1,4 @@
+using Assets.Scripts.Constants;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,19 @@ public abstract class Collidable : MonoBehaviour
     public ContactFilter2D contactFilter;
     private BoxCollider2D boxCollider;
     private readonly Collider2D[] hits = new Collider2D[10]; // limit the number of hits to be 10 at a time
+
+    #region common utils
+    protected bool IsFighterHit(Collider2D collider)
+    {
+        return collider.CompareTag(Tags.FIGHTER);
+    }
+
+    protected bool IsPlayerHit(Collider2D collider)
+    {
+        return IsFighterHit(collider) && collider.name == "Player";
+    }
+
+    #endregion
 
     protected virtual void Start()
     {

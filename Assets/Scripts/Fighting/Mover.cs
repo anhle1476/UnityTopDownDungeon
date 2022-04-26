@@ -23,14 +23,18 @@ public abstract class Mover : Fighter
     /// Move the object positon to the target direction with a specified speed
     /// </summary>
     /// <param name="toTargetPosition"></param>
-    /// <param name="movementSpeed"></param>
-    protected virtual void UpdateMotor(Vector3 toTargetPosition, float movementSpeed = 1)
+    /// <param name="movementSpeed">Movement speed of the object</param>
+    /// <param name="stopOnClose">try to stop when come close to the target position</param>
+    protected virtual void UpdateMotor(Vector3 toTargetPosition, float movementSpeed = 1, bool stopOnClose = true)
     {
+        if (IsDeath) 
+            return;
+
         var direction = toTargetPosition.normalized;
         // update MoveDelta
         moveDelta = new Vector3(direction.x * xSpeed * movementSpeed, direction.y * ySpeed * movementSpeed, 0);
 
-        if (toTargetPosition.magnitude <= moveDelta.magnitude)
+        if (stopOnClose && toTargetPosition.magnitude <= moveDelta.magnitude)
         {
             // Distance to the target is smaller then the move delta, we will move to the target directly instead of go pass it
             moveDelta = toTargetPosition;

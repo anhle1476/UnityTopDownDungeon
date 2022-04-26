@@ -1,5 +1,7 @@
+using Assets.Scripts.Constants;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Fighter : MonoBehaviour
@@ -15,6 +17,13 @@ public class Fighter : MonoBehaviour
 
     // Push
     protected Vector3 pushDirection;
+
+    public static readonly string RECEIVE_DAMAGE_METHOD_NAME = nameof(ReceiveDamage);
+
+    /// <summary>
+    ///  Is the fighter death
+    /// </summary>
+    protected bool IsDeath => hitPoint <= 0 && lastImmune > 0 && Time.time - lastImmune > immuneTime;
 
     protected virtual void ReceiveDamage(Damage dmg)
     {
@@ -37,7 +46,7 @@ public class Fighter : MonoBehaviour
 
     protected virtual void Death()
     {
-
+        
     }
 
     private void ShowDamageReceived(int damageAmount)
