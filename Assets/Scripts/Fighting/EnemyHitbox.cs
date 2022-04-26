@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemyHitbox : Collidable
 {
     public int damagePoint = 1;
-    public float pushForce = 0.5f;
+    public float pushForce = 1f;
     
     public float hitCooldown = 0.5f;
     private float lastHit;

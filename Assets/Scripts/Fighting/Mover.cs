@@ -40,10 +40,10 @@ public abstract class Mover : Fighter
             moveDelta = toTargetPosition;
         }
 
-        if (Time.time - lastImmune < pushRecoverySpeed)
-        {
-            moveDelta += pushDirection;
-        }
+        moveDelta += pushDirection;
+
+        // gradually reduce the push vector to zero
+        pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
 
         int blockingLayerMask = LayerMask.GetMask(movementBlockingLayers.ToArray()); ;
 
