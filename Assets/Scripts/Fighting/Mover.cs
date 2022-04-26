@@ -60,7 +60,7 @@ public abstract class Mover : Fighter
         }
         else
         {
-            SpecificMovingOnYHit(moveDelta, hit.collider);
+            SpecificMovingOnYStuck(moveDelta, hit.collider);
         }
 
         // hit for x direction
@@ -78,28 +78,28 @@ public abstract class Mover : Fighter
         }
         else
         {
-            SpecificMovingOnXHit(moveDelta, hit.collider);
+            SpecificMovingOnXStuck(moveDelta, hit.collider);
         }
     }
 
     /// <summary>
-    /// Specific handling the movement when Y is hit on moving. 
+    /// Specific handling the movement when Y is stuck on moving. 
     /// Otherwise, there will be no Y direction movement by default.
     /// </summary>
     /// <param name="moveDelta"></param>
     /// <param name="collider"></param>
-    protected virtual void SpecificMovingOnYHit(Vector3 moveDelta, Collider2D collider)
+    protected virtual void SpecificMovingOnYStuck(Vector3 moveDelta, Collider2D collider)
     {
 
     }
 
     /// <summary>
-    /// Specific handling the movement when Y is hit on moving. 
+    /// Specific handling the movement when Y is stuck on moving. 
     /// Otherwise, there will be no X direction movement by default.
     /// </summary>
     /// <param name="moveDelta"></param>
     /// <param name="collider"></param>
-    protected virtual void SpecificMovingOnXHit(Vector3 moveDelta, Collider2D collider)
+    protected virtual void SpecificMovingOnXStuck(Vector3 moveDelta, Collider2D collider)
     {
 
     }
