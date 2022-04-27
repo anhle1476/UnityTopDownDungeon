@@ -9,7 +9,7 @@ public class Portal : Collidable
 
     protected override void OnCollide(Collider2D collider)
     {
-        if (collider.tag == "Player")
+        if (collider.name == "Player")
         {
             GameManager.instance.SaveState();
             Invoke(nameof(LoadNextScence), loadNextScenceDelay);
