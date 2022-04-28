@@ -40,18 +40,18 @@ public abstract class Mover : Fighter
             moveDelta = toTargetPosition;
         }
 
+        // flip the character facing direction left/right
+        if (moveDelta.x > 0)
+            transform.localScale = Vector3.one;
+        else if (moveDelta.x < 0)
+            transform.localScale = new Vector3(-1, 1, 1);
+
         moveDelta += pushDirection;
 
         // gradually reduce the push vector to zero
         pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
 
         int blockingLayerMask = LayerMask.GetMask(movementBlockingLayers.ToArray()); ;
-
-        // flip the character facing direction left/right
-        if (moveDelta.x > 0)
-            transform.localScale = Vector3.one;
-        else if (moveDelta.x < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
 
         // hit for y direction
         hit = Physics2D.BoxCast(
