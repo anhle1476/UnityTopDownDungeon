@@ -5050,6 +5050,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: menu_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce45b600e36776b4da64dc3697e7303f
+      internalID: 903134194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -5146,6 +5167,7 @@ TextureImporter:
       enemy_demon_4: 1863811527
       enemy_zombie_5: -1419118611
       Atlas_48: -1857666885
+      menu_0: 903134194
       portal_7: -178238726
       torch_1: 1413456541
       wall_9: 1861067322
@@ -5198,11 +5220,12 @@ TextureImporter:
       enemy_demon_1: -210651493
       Atlas_58: -1902489520
       weapon_5: 785508232
-      Atlas_50: -2142494925
       pillar_3: -202179120
-      enemy_demon_2: 1706718593
+      Atlas_134: -51756940
+      Atlas_50: -2142494925
       floor_6: -2085660415
       Atlas_137: -1962128311
+      enemy_demon_2: 1706718593
       Atlas_53: 1323688505
       chest_4: 681758429
       enemy_water_1: -2045363961
@@ -5210,7 +5233,6 @@ TextureImporter:
       Atlas_38: 2046510513
       Atlas_55: -1103883653
       Atlas_56: -1247925114
-      Atlas_134: -51756940
       weapon_15: 1035473854
       Atlas_133: 1586465231
       Atlas_3: -479853545
