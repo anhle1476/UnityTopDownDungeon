@@ -11,6 +11,7 @@ public class Chest : Collectable
     protected override void OnCollect(Collider2D collider)
     {
         GetComponent<SpriteRenderer>().sprite = emptyChest;
+        GameManager.instance.pesos += pesosAmount;
         ShowCollectMessage();
     }
 

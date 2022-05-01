@@ -23,14 +23,16 @@ public class GameManager : MonoBehaviour
     }
 
     // Resources
+    [SerializeField]
     public List<Sprite> playerSprites;
+    [SerializeField]
     public List<Sprite> weaponSprites;
-    public List<int> playerPrices;
+    public List<int> weaponPrices;
     public List<int> xpTable;
 
     // References
     public Player player;
-    // public Weapon weapon
+    public Weapon weapon;
     public FloatingTextManager floatingTextManager;
 
     // Logic
@@ -72,5 +74,26 @@ public class GameManager : MonoBehaviour
         experience = int.Parse(data[2]);
     }
 
+
+    public bool TryUpgradeWeapon()
+    {
+        if (CanUpgradeWeapon(out int nextWeaponPrice))
+        {
+            pesos -= nextWeaponPrice;
+            weapon.UpgradeWeapon();
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanUpgradeWeapon(out int nextWeaponPrice)
+    {
+        nextWeaponPrice = 0;
+        if (weaponSprites.Count <= weapon.weaponLevel)
+            return false;
+        // next weapon lv N will be have their price stored in index N-1 (0 based index)
+        nextWeaponPrice = weaponPrices[weapon.weaponLevel];
+        return pesos >= nextWeaponPrice;
+    }
 
 }

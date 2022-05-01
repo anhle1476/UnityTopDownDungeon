@@ -30,7 +30,7 @@ public class FloatingTextManager : MonoBehaviour
             floatingText.txt = floatingText.go.GetComponent<TextMeshProUGUI>();
 
             floatingTexts.Add(floatingText);
-        }
+        } 
 
         return floatingText;
     }

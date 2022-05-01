@@ -58,4 +58,10 @@ public class Weapon : Collidable
             collider.SendMessage(Fighter.RECEIVE_DAMAGE_METHOD_NAME, dmg);
         }
     }
+
+    public void UpgradeWeapon()
+    {
+        weaponLevel++;
+        spriteRenderer.sprite = GameManager.instance.weaponSprites[weaponLevel - 1];
+    }
 }
